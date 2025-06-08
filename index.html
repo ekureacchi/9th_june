@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="1.webp">
+    <title>[данные удалены] тебя</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #d8c6ff, #a796b6);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .phone {
+            position: relative;
+            width: 300px;
+            height: 590px;
+            background: #533771;
+            border-radius: 35px;
+            padding: 20px;
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.3),
+                inset 0 0 15px rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .screen {
+            width: 100%;
+            height: 85%;
+            background-color: #313131;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            max-width: 110%;
+            max-height: 100%;
+            border-radius:20px;
+            display: none;
+            box-shadow: 0 0 20px rgba(83, 55, 113, 0.7);
+            border: 2px solid #533771;
+        }
+
+        .image-container img.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0 15px;
+        }
+
+        .button {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffffff, #f3e8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #533771;
+            font-size: 24px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s;
+            box-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.2),
+                inset 0 0 5px rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.25),
+                inset 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+            box-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.15),
+                inset 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .center-button {
+            background: linear-gradient(145deg, #3a254f, #533771);
+            color: white;
+            font-size: 26px;
+        }
+
+        .center-button:hover {
+            background: linear-gradient(145deg, #2e1d3f, #3a254f);
+            box-shadow:
+                0 6px 12px rgba(83, 55, 113, 0.5),
+                inset 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35%;
+            height: 18px;
+            background: #3a254f;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10;
+            box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .camera {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: #000;
+            border-radius: 50%;
+            z-index: 11;
+            border: 1px solid #333;
+        }
+
+        .speaker {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            z-index: 11;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="notch"></div>
+        <div class="camera"></div>
+        <div class="speaker"></div>
+        <div class="screen">
+            <div class="image-container">
+                <!-- Изображения будут добавляться через JavaScript -->
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="button left-button">←</div>
+            <div class="button center-button">⏻</div>
+            <div class="button right-button">→</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = [
+                '8.jpg',
+                '1.jpg',
+                '5.jpg',
+                '2.jpg',
+                '3.jpg',
+                '4.jpg',
+                '6.jpg',
+                '7.jpg',
+                '9.jpg',
+                '10.jpg',
+                '11.jpg',
+                '12.jpg',
+                '13.jpg',
+                '14.jpg',
+                '15.jpg'
+            ];
+
+            const imageContainer = document.querySelector('.image-container');
+            const centerButton = document.querySelector('.center-button');
+            const leftButton = document.querySelector('.left-button');
+            const rightButton = document.querySelector('.right-button');
+
+            let currentImageIndex = 0;
+            let imagesLoaded = false;
+
+            // Создаем элементы изображений
+            images.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Image ${index + 1}`;
+                img.dataset.index = index;
+                imageContainer.appendChild(img);
+            });
+
+            // Функция для показа изображения
+            function showImage(index) {
+                const allImages = document.querySelectorAll('.image-container img');
+                allImages.forEach(img => img.classList.remove('active'));
+                allImages[index].classList.add('active');
+            }
+
+            // Центральная кнопка - показать/скрыть изображение
+            centerButton.addEventListener('click', function() {
+                if (!imagesLoaded) {
+                    showImage(currentImageIndex);
+                    imagesLoaded = true;
+                    centerButton.textContent = "💅";
+                } else {
+                    const activeImage = document.querySelector('.image-container img.active');
+                    if (activeImage) {
+                        activeImage.classList.remove('active');
+                        centerButton.textContent = "⏻";
+                    } else {
+                        showImage(currentImageIndex);
+                        centerButton.textContent = "💅";
+                    }
+                }
+            });
+
+            // Левая кнопка - предыдущее изображение
+            leftButton.addEventListener('click', function() {
+                if (!imagesLoaded) return;
+
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                showImage(currentImageIndex);
+            });
+
+            // Правая кнопка - следующее изображение
+            rightButton.addEventListener('click', function() {
+                if (!imagesLoaded) return;
+
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                showImage(currentImageIndex);
+            });
+        });
+    </script>
+</body>
+</html>
